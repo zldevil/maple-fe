@@ -1,10 +1,9 @@
-import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router';
-import NProgress from 'nprogress';
+import { createRouter, createWebHashHistory, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import 'nprogress/nprogress.css';
 import { getSession, clearSession } from '@/common/utils/storage';
 import { templateResolve } from '@/common/utils/string';
 import { NextLoading } from '@/common/utils/loading';
-import { dynamicRoutes, staticRoutes, pathMatch } from './route';
+import { staticRoutes, pathMatch } from './route';
 import openApi from '@/common/openApi';
 import sockets from '@/common/sockets';
 import pinia from '@/store/index';
@@ -15,9 +14,10 @@ import { useKeepALiveNames } from '@/store/keepAliveNames';
 import { autoLogin } from '@/views/login/component/api.ts';
 
 
+
 /**
- * 获取目录下的 .vue、.tsx 全部文件
- * @method import.meta.glob
+ * 获取目录下的 .vue、.tsx 全部文件 
+ * @method import.meta.glob  
  * @link 参考：https://cn.vitejs.dev/guide/features.html#json
  */
 const viewsModules: any = import.meta.glob(['../views/**/*.{vue,tsx}', '!../views/layout/**/*.{vue,tsx}']);
@@ -26,7 +26,7 @@ const dynamicViewsModules: Record<string, Function> = Object.assign({}, { ...vie
 // 添加静态路由
 const router = createRouter({
     //路由hash模式
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: staticRoutes,
 });
 
@@ -46,7 +46,7 @@ export function initAllFun() {
         router.addRoute(route as unknown as RouteRecordRaw);
     });
     // 过滤权限菜单
-    useRoutesList().setRoutesList(setFilterMenuFun(dynamicRoutes[0].children, useUserInfo().userInfo.menus));
+    useRoutesList().setRoutesList(setFilterMenuFun(staticRoutes[0].children, useUserInfo().userInfo.menus));
 }
 
 // 后端控制路由：执行路由数据初始化 
@@ -60,15 +60,15 @@ export async function initBackEndControlRoutesFun() {
     useUserInfo().setUserInfo({});
     // 获取路由
     let menuRoute = await getBackEndControlRoutes();
-    dynamicRoutes[0].children = backEndRouterConverter(menuRoute); // 处理路由（component）
+    staticRoutes[0].children = backEndRouterConverter(menuRoute); // 处理路由（component）
     // 添加404界面
     router.addRoute(pathMatch);
     resetRoute(); // 删除/重置路由
     // 添加动态路由
-    formatTwoStageRoutes(formatFlatteningRoutes(dynamicRoutes)).forEach((route: any) => {
+    formatTwoStageRoutes(formatFlatteningRoutes(staticRoutes)).forEach((route: any) => {
         router.addRoute(route as unknown as RouteRecordRaw);
     });
-    useRoutesList().setRoutesList(dynamicRoutes[0].children);
+    useRoutesList().setRoutesList(staticRoutes[0].children);
 }
 
 // 后端控制路由，isRequestRoutes 为 true，则开启后端控制路由
@@ -221,7 +221,7 @@ export function setFilterRoute(chil: any) {
 
 // 比对后的路由表，进行重新赋值
 export function setFilterRouteEnd() {
-    let filterRouteEnd: any = formatTwoStageRoutes(formatFlatteningRoutes(dynamicRoutes));
+    let filterRouteEnd: any = formatTwoStageRoutes(formatFlatteningRoutes(staticRoutes));
     filterRouteEnd[0].children = setFilterRoute(filterRouteEnd[0].children);
     return filterRouteEnd;
 }
@@ -251,8 +251,7 @@ let loadRouter = false;
 
 // 路由加载前
 router.beforeEach(async (to, from, next) => {
-    NProgress.configure({ showSpinner: false });
-    if (to.meta.title) NProgress.start();
+
 
     // 如果有标题参数，则再原标题后加上参数来区别
     if (to.meta.titleRename) {
@@ -263,7 +262,7 @@ router.beforeEach(async (to, from, next) => {
     //token=true
     if ((to.path === '/login' || to.path == '/oauth2/callback') && !token) {
         next();
-        NProgress.done();
+
         return;
     }
     if (!token) {
@@ -281,7 +280,6 @@ router.beforeEach(async (to, from, next) => {
     }
     if (token && to.path === '/login') {
         next('/');
-        NProgress.done();
         return;
     }
 
@@ -301,7 +299,6 @@ router.beforeEach(async (to, from, next) => {
 
 // 路由加载后
 router.afterEach(() => {
-    NProgress.done();
     NextLoading.done();
 });
 

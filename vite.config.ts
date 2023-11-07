@@ -1,10 +1,27 @@
 import { defineConfig } from 'vite'
 import path from "path"
 import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    AutoImport(
+      {
+        resolvers: [ElementPlusResolver()],
+        imports: [
+          "vue",
+          "vue-router",
+        ]
+      }
+    ),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"), // 路径别名
@@ -14,7 +31,7 @@ export default defineConfig({
       // "@pages": path.resolve(__dirname, "src/pages"),
       // "@store": path.resolve(__dirname, "src/store"),
     },
-    extensions: [".js", ".json", ".ts", ".vue"], // 使用路径别名时想要省略的后缀名，可以自己 增减
+    extensions: [".js", ".json", ".ts"], // 使用路径别名时想要省略的后缀名，可以自己 增减
   },
   root: process.cwd(),
   //base: process.env.NODE_ENV === 'production' ? VITE_PUBLIC_PATH : './',
