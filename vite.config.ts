@@ -8,19 +8,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
-    AutoImport(
-      {
-        resolvers: [ElementPlusResolver()],
-        imports: [
-          "vue",
-          "vue-router",
-        ]
-      }
-    ),
-    Components({
-      resolvers: [ElementPlusResolver()],
-    }),
+    vue()
   ],
   resolve: {
     alias: {
