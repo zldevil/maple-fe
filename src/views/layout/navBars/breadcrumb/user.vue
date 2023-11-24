@@ -25,7 +25,8 @@
             </el-icon>
         </div>
         <div class="layout-navbars-breadcrumb-user-icon">
-            <el-popover placement="bottom" trigger="click" :visible="state.isShowUserNewsPopover" :width="300" popper-class="el-popover-pupop-user-news">
+            <el-popover placement="bottom" trigger="click" :visible="state.isShowUserNewsPopover" :width="300"
+                popper-class="el-popover-pupop-user-news">
                 <template #reference>
                     <el-badge :is-dot="false" @click="state.isShowUserNewsPopover = !state.isShowUserNewsPopover">
                         <el-icon title="消息">
@@ -69,7 +70,6 @@ import { ref, computed, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessageBox, ElMessage } from 'element-plus';
 import screenfull from 'screenfull';
-import { resetRoute } from '@/router/index';
 import { storeToRefs } from 'pinia';
 import { useUserInfo } from '@/store/userInfo';
 import { useThemeConfig } from '@/store/themeConfig';
@@ -140,13 +140,13 @@ const onHandleCommandClick = (path: string) => {
         })
             .then(() => {
                 clearSession(); // 清除缓存/token等
-                resetRoute(); // 删除/重置路由
+                //resetRoute(); // 删除/重置路由
                 router.push('/login');
                 setTimeout(() => {
                     ElMessage.success('安全退出成功！');
                 }, 300);
             })
-            .catch(() => {});
+            .catch(() => { });
     } else {
         router.push(path);
     }

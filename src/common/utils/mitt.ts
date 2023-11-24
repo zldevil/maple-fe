@@ -1,7 +1,7 @@
 // https://www.npmjs.com/package/mitt
 import mitt, { type Emitter } from 'mitt';
 
-// 类型
+// 类型 
 const emitter: Emitter<any> = mitt<any>();
 
 // 导出

@@ -4,11 +4,10 @@
             <ul class="layout-navbars-tagsview-ul" :class="setTagsStyle" ref="tagsUlRef">
                 <li v-for="(v, k) in state.tagsViewList" :key="k" class="layout-navbars-tagsview-ul-li" :data-name="v.name"
                     :class="{ 'is-active': isActive(v) }" @contextmenu.prevent="onContextmenu(v, $event)"
-                    @click="onTagsClick(v, k)" :ref="
-                        (el) => {
+                    @click="onTagsClick(v, k)" :ref="(el) => {
                             if (el) tagsRefs[k] = el;
                         }
-                    ">
+                        ">
                     <SvgIcon name="iconfont icon-tag-view-active" class="layout-navbars-tagsview-ul-li-iconfont font14"
                         v-if="isActive(v)" />
                     <SvgIcon :name="v.meta.icon" class="layout-navbars-tagsview-ul-li-iconfont"
@@ -106,7 +105,7 @@ const addTagsView = (path: string, to: any = null) => {
             return false;
         }
     }
-    
+
     const tagView = { ...to }
     // 防止Converting circular structure to JSON错误
     tagView.matched = null;

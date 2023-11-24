@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup name="layoutColumnsAside">
-import { reactive, ref, computed, onMounted, nextTick, getCurrentInstance, watch } from 'vue';
+import { reactive, ref, computed, onMounted, nextTick, watch } from 'vue';
 import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router';
 import pinia from '@/store';
 import { useThemeConfig } from '@/store/themeConfig';
