@@ -194,10 +194,10 @@ const { loginForm, changePwdDialog, loading } = toRefs(state)
 
 onMounted(async () => {
   nextTick(async () => {
-    const res = await getSecurity()
-    if (res) {
-      state.Security = res
-    }
+    // const res = await getSecurity()
+    // if (res) {
+    //   state.Security = res
+    // }
   })
   // 移除公钥, 方便后续重新获取
   sessionStorage.removeItem('RsaPublicKey')
@@ -212,7 +212,6 @@ const currentTime = computed(() => {
 const login = () => {
   loginFormRef.value.validate((valid: boolean) => {
     if (valid) {
-      //return true
       return onSignIn()
     } else {
       return false
@@ -228,11 +227,7 @@ const onSignIn = async () => {
   try {
     const loginReq = { ...state.loginForm }
     loginReq.password = await RsaEncrypt(originPwd)
-    if (state.loginForm.ldapLogin) {
-      loginRes = await openApi.ldapLogin(loginReq)
-    } else {
-      loginRes = await openApi.login(loginReq)
-    }
+    loginRes = await openApi.login(loginReq)
   } catch (e: any) {
     state.loading.signIn = false
     // state.loginForm.captcha = '';
