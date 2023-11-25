@@ -1,11 +1,9 @@
 <template>
     <div>
-        <el-button>欢迎！！！！！！</el-button>
+        欢迎！！！！！！
     </div>
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <style scoped></style>

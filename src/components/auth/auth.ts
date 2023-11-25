@@ -1,4 +1,4 @@
-import { useUserInfo } from '@/store/userInfo';
+import { useUserInfo } from '@/store/userInfo'
 
 /**
  * 判断当前用户是否拥有指定权限
@@ -6,7 +6,7 @@ import { useUserInfo } from '@/store/userInfo';
  * @returns
  */
 export function hasPerm(code: string) {
-    return useUserInfo().userInfo.permissions.some((v: any) => v === code);
+  return useUserInfo().userInfo.permissions.some((v: any) => v === code)
 }
 
 /**
@@ -15,11 +15,11 @@ export function hasPerm(code: string) {
  * @returns {"xxx:save": true}  key->permission code
  */
 export function hasPerms(permCodes: any[]) {
-    const res = {};
-    for (let permCode of permCodes) {
-        if (hasPerm(permCode)) {
-            res[permCode] = true;
-        }
+  const res = {}
+  for (let permCode of permCodes) {
+    if (hasPerm(permCode)) {
+      res[permCode] = true
     }
-    return res;
+  }
+  return res
 }

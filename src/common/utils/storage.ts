@@ -1,54 +1,54 @@
 // 1. localStorage
 // 设置永久缓存
 export function setLocal(key: string, val: any) {
-    window.localStorage.setItem(key, JSON.stringify(val));
+  window.localStorage.setItem(key, JSON.stringify(val))
 }
 // 获取永久缓存
 export function getLocal(key: string) {
-    let json: any = window.localStorage.getItem(key);
-    return JSON.parse(json);
+  let json: any = window.localStorage.getItem(key)
+  return JSON.parse(json)
 }
 // 移除永久缓存
 export function removeLocal(key: string) {
-    window.localStorage.removeItem(key);
+  window.localStorage.removeItem(key)
 }
 // 移除全部永久缓存
 export function clearLocal() {
-    window.localStorage.clear();
+  window.localStorage.clear()
 }
 
 // 2. sessionStorage
 // 设置临时缓存
 export function setSession(key: string, val: any) {
-    window.sessionStorage.setItem(key, JSON.stringify(val));
+  window.sessionStorage.setItem(key, JSON.stringify(val))
 }
 // 获取临时缓存
 export function getSession(key: string) {
-    let json: any = window.sessionStorage.getItem(key);
-    return JSON.parse(json);
+  let json: any = window.sessionStorage.getItem(key)
+  return JSON.parse(json)
 }
 // 移除临时缓存
 export function removeSession(key: string) {
-    window.sessionStorage.removeItem(key);
+  window.sessionStorage.removeItem(key)
 }
 // 移除全部临时缓存
 export function clearSession() {
-    window.sessionStorage.clear();
+  window.sessionStorage.clear()
 }
 
 export function getUserInfo4Session() {
-    return getSession('userInfo');
+  return getSession('userInfo')
 }
 
 export function setUserInfo2Session(userinfo: any) {
-    setSession('userInfo', userinfo);
+  setSession('userInfo', userinfo)
 }
 
 // 获取是否开启水印
 export function getUseWatermark4Session() {
-    return getSession('useWatermark');
+  return getSession('useWatermark')
 }
 
 export function setUseWatermark2Session(useWatermark: boolean) {
-    setSession('useWatermark', useWatermark);
+  setSession('useWatermark', useWatermark)
 }

@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 
 /**
  * 路由列表
@@ -7,12 +7,12 @@ import { defineStore } from 'pinia';
  * @methods setColumnsNavHover 设置分栏布局最左侧导航鼠标移入 boolean
  */
 export const useRoutesList = defineStore('routesList', {
-    state: (): RoutesListState => ({
-        routesList: [],
-    }),
-    actions: {
-        async setRoutesList(data: Array<string>) {
-            this.routesList = data;
-        },
-    },
-});
+  state: (): RoutesListState => ({
+    routesList: []
+  }),
+  actions: {
+    async setRoutesList(data: Array<string>) {
+      this.routesList = data
+    }
+  }
+})

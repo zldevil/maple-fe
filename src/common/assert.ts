@@ -2,11 +2,11 @@
  * 不符合业务断言错误
  */
 class AssertError extends Error {
-    constructor(message: string) {
-        super(message);
-        // 错误类名
-        this.name = 'AssertError';
-    }
+  constructor(message: string) {
+    super(message)
+    // 错误类名
+    this.name = 'AssertError'
+  }
 }
 
 /**
@@ -16,9 +16,9 @@ class AssertError extends Error {
  * @param msg 错误消息
  */
 export function isTrue(condition: boolean, msg: string) {
-    if (!condition) {
-        throw new AssertError(msg);
-    }
+  if (!condition) {
+    throw new AssertError(msg)
+  }
 }
 
 /**
@@ -28,7 +28,7 @@ export function isTrue(condition: boolean, msg: string) {
  * @param msg 错误消息
  */
 export function notBlank(obj: any, msg: string) {
-    isTrue(obj, msg);
+  isTrue(obj, msg)
 }
 
 /**
@@ -39,7 +39,7 @@ export function notBlank(obj: any, msg: string) {
  * @param msg 错误消息
  */
 export function isEquals(obj1: any, obj2: any, msg: string) {
-    isTrue(obj1 === obj2, msg);
+  isTrue(obj1 === obj2, msg)
 }
 
 /**
@@ -49,9 +49,9 @@ export function isEquals(obj1: any, obj2: any, msg: string) {
  * @param msg 错误提示
  */
 export function notNull(obj: any, msg: string) {
-    if (obj == null || obj == undefined) {
-        throw new AssertError(msg);
-    }
+  if (obj == null || obj == undefined) {
+    throw new AssertError(msg)
+  }
 }
 
 /**
@@ -61,7 +61,7 @@ export function notNull(obj: any, msg: string) {
  * @param msg 错误提示
  */
 export function notEmpty(str: string, msg: string) {
-    if (str == null || str == undefined || str == '') {
-        throw new AssertError(msg);
-    }
+  if (str == null || str == undefined || str == '') {
+    throw new AssertError(msg)
+  }
 }

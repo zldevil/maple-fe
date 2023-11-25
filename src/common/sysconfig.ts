@@ -1,9 +1,9 @@
-import openApi from './openApi';
+import openApi from './openApi'
 
 // 登录是否使用验证码配置key
-const AccountLoginSecurity = 'AccountLoginSecurity';
-const UseLoginCaptchaConfigKey = 'UseLoginCaptcha';
-const UseWartermarkConfigKey = 'UseWartermark';
+const AccountLoginSecurity = 'AccountLoginSecurity'
+const UseLoginCaptchaConfigKey = 'UseLoginCaptcha'
+const UseWartermarkConfigKey = 'UseWartermark'
 
 /**
  * 获取系统配置值
@@ -12,7 +12,7 @@ const UseWartermarkConfigKey = 'UseWartermark';
  * @returns 配置值
  */
 export async function getConfigValue(key: string): Promise<string> {
-    return (await openApi.getConfigValue({ key })) as string;
+  return (await openApi.getConfigValue({ key })) as string
 }
 
 /**
@@ -23,8 +23,8 @@ export async function getConfigValue(key: string): Promise<string> {
  * @returns 是否为ture，1: true；其他: false
  */
 export async function getBoolConfigValue(key: string, defaultValue: boolean): Promise<boolean> {
-    const value = await getConfigValue(key);
-    return convertBool(value, defaultValue);
+  const value = await getConfigValue(key)
+  return convertBool(value, defaultValue)
 }
 
 /**
@@ -33,26 +33,26 @@ export async function getBoolConfigValue(key: string, defaultValue: boolean): Pr
  * @returns
  */
 export async function getAccountLoginSecurity(): Promise<any> {
-    const value = await getConfigValue(AccountLoginSecurity);
-    if (!value) {
-        return null;
-    }
-    const jsonValue = JSON.parse(value);
-    jsonValue.useCaptcha = convertBool(jsonValue.useCaptcha, true);
-    jsonValue.useOtp = convertBool(jsonValue.useOtp, true);
-    return jsonValue;
+  const value = await getConfigValue(AccountLoginSecurity)
+  if (!value) {
+    return null
+  }
+  const jsonValue = JSON.parse(value)
+  jsonValue.useCaptcha = convertBool(jsonValue.useCaptcha, true)
+  jsonValue.useOtp = convertBool(jsonValue.useOtp, true)
+  return jsonValue
 }
 getSecurity
 
 export async function getSecurity(): Promise<any> {
-    const value = await getConfigValue(AccountLoginSecurity);
-    if (!value) {
-        return null;
-    }
-    const jsonValue = JSON.parse(value);
-    jsonValue.useCaptcha = convertBool(jsonValue.useCaptcha, true);
-    jsonValue.useOtp = convertBool(jsonValue.useOtp, true);
-    return jsonValue;
+  const value = await getConfigValue(AccountLoginSecurity)
+  if (!value) {
+    return null
+  }
+  const jsonValue = JSON.parse(value)
+  jsonValue.useCaptcha = convertBool(jsonValue.useCaptcha, true)
+  jsonValue.useOtp = convertBool(jsonValue.useOtp, true)
+  return jsonValue
 }
 
 /**
@@ -61,7 +61,7 @@ export async function getSecurity(): Promise<any> {
  * @returns
  */
 export async function useLoginCaptcha(): Promise<boolean> {
-    return await getBoolConfigValue(UseLoginCaptchaConfigKey, true);
+  return await getBoolConfigValue(UseLoginCaptchaConfigKey, true)
 }
 
 /**
@@ -70,14 +70,14 @@ export async function useLoginCaptcha(): Promise<boolean> {
  * @returns
  */
 export async function useWartermark(): Promise<boolean> {
-    return await getBoolConfigValue(UseWartermarkConfigKey, true);
+  return await getBoolConfigValue(UseWartermarkConfigKey, true)
 }
 
 function convertBool(value: string, defaultValue: boolean) {
-    if (!value) {
-        return defaultValue;
-    }
-    return value == '1' || value == 'true';
+  if (!value) {
+    return defaultValue
+  }
+  return value == '1' || value == 'true'
 }
 
 /**
@@ -86,7 +86,6 @@ function convertBool(value: string, defaultValue: boolean) {
  * @returns
  */
 export async function getLdapEnabled(): Promise<any> {
-    const value = await openApi.getLdapEnabled();
-    return convertBool(value, false);
+  const value = await openApi.getLdapEnabled()
+  return convertBool(value, false)
 }
-
