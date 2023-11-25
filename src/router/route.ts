@@ -103,6 +103,14 @@ export const staticRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: 'home'
     }
+  },
+  {
+    path: '/event',
+    name: 'event',
+    component: () => import('@/views/event/index.vue'),
+    meta: {
+      title: 'home'
+    }
   }
 ]
 
