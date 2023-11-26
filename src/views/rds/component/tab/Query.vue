@@ -132,8 +132,8 @@ import { editor } from 'monaco-editor'
 import SolarizedLight from 'monaco-themes/themes/Solarized-light.json'
 import DbTable from '../DbTable.vue'
 import { TabInfo } from '../../db'
-import { exportCsv } from '@/common/utils/export'
-import { dateStrFormat } from '@/common/utils/date'
+import { exportCsv } from '@/utils/export'
+import { dateStrFormat } from '@/utils/date'
 import { dbApi } from '@/common/rdsApi'
 
 const emits = defineEmits(['saveSqlSuccess', 'deleteSqlSuccess'])

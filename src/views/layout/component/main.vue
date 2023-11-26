@@ -7,7 +7,6 @@
       :style="{ minHeight: `calc(100vh - ${state.headerHeight}` }"
     >
       <LayoutParentView />
-      <Footer v-if="themeConfig.isFooter" />
     </el-scrollbar>
     <Link
       :style="{ height: `calc(100vh - ${state.headerHeight}` }"
@@ -29,7 +28,6 @@ import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useThemeConfig } from '@/store/themeConfig'
 import LayoutParentView from '@/views/layout/routerView/parent.vue'
-import Footer from '@/views/layout/footer/index.vue'
 import Link from '@/views/layout/routerView/link.vue'
 import Iframes from '@/views/layout/routerView/iframes.vue'
 

@@ -25,16 +25,6 @@ export const dynamicRoutes = [
           isIframe: false,
           icon: 'el-icon-s-home'
         }
-      },
-      {
-        path: '/personal',
-        name: 'personal',
-        component: () => import('@/views/personal/index.vue'),
-        meta: {
-          title: '个人中心',
-          isKeepAlive: true,
-          icon: 'el-icon-user'
-        }
       }
       // {
       //     path: '/sys',

@@ -195,7 +195,7 @@
           :required="column.nullable != 'YES' && column.columnKey != 'PRI'"
         >
           <el-input-number
-            v-if="DbInst.isNumber(column.columnType)"
+            v-if="RdsIns.isNumber(column.columnType)"
             v-model="addDataDialog.data[`${column.columnName}`]"
             :placeholder="`${column.columnType}  ${column.columnComment}`"
             class="w100"
@@ -223,9 +223,9 @@ import { onMounted, watch, reactive, toRefs, ref } from 'vue'
 import { isTrue, notEmpty, notBlank } from '@/common/assert'
 import { ElMessage } from 'element-plus'
 
-import { DbInst, TabInfo } from '../../db'
+import { RdsIns, TabInfo } from '../../db'
 import { exportCsv } from '@/common/utils/export'
-import { dateStrFormat } from '@/common/utils/date'
+import { dateStrFormat } from '@/utils/date'
 import DbTable from '../DbTable.vue'
 
 const emits = defineEmits(['genInsertSql'])
@@ -254,7 +254,7 @@ const state = reactive({
   loading: false, // 是否在加载数据
   columns: [] as any,
   pageNum: 1,
-  pageSize: DbInst.DefaultLimit,
+  pageSize: RdsIns.DefaultLimit,
   pageSizes: [20, 40, 80, 100, 200, 300, 400],
   count: 0,
   selectionDatas: [] as any,
@@ -337,7 +337,7 @@ const selectData = async () => {
   try {
     const countRes = await dbInst.runSql(
       db,
-      DbInst.getDefaultCountSql(state.table, state.condition)
+      RdsIns.getDefaultCountSql(state.table, state.condition)
     )
     state.count = countRes.res[0].count
     let sql = dbInst.getDefaultSelectSql(
@@ -404,7 +404,7 @@ const onConfirmCondition = () => {
   }
   const row = conditionDialog.columnRow as any
   condition += `${row.columnName} ${conditionDialog.condition} `
-  state.condition = condition + DbInst.wrapColumnValue(row.columnType, conditionDialog.value)
+  state.condition = condition + RdsIns.wrapColumnValue(row.columnType, conditionDialog.value)
   onCancelCondition()
 }
 
@@ -508,7 +508,7 @@ const addRow = async () => {
         if (!value) {
           continue
         }
-        obj[`${item.columnName}`] = DbInst.wrapValueByType(value)
+        obj[`${item.columnName}`] = RdsIns.wrapValueByType(value)
       }
       let columnNames = Object.keys(obj).join(',')
       let values = Object.values(obj).join(',')

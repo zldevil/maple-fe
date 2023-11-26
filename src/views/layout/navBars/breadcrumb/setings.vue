@@ -359,12 +359,6 @@
           </div>
         </div>
         <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">开启 Footer</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="themeConfig.isFooter" @change="setLocalThemeConfig"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
           <div class="layout-breadcrumb-seting-bar-flex-label">灰色模式</div>
           <div class="layout-breadcrumb-seting-bar-flex-value">
             <el-switch

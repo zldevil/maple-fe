@@ -1,6 +1,6 @@
 import EnumValue from '@/common/Enum'
-import { dateFormat } from '@/common/utils/date'
-import { getTextWidth } from '@/common/utils/string'
+import { dateFormat } from '@/utils/date'
+import { getTextWidth } from '@/utils/string'
 
 export class TableColumn {
   /**
