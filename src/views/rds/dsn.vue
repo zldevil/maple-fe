@@ -397,13 +397,12 @@
       </el-descriptions>
     </el-dialog>
 
-    <!-- 控制展示 -->
-    <rds-edit
+    <db-edit
       @val-change="valChange"
       :title="dbEditDialog.title"
       v-model:visible="dbEditDialog.visible"
       v-model:db="dbEditDialog.data"
-    ></rds-edit>
+    ></db-edit>
     <create-table
       :title="tableCreateDialog.title"
       :active-name="tableCreateDialog.activeName"
@@ -434,7 +433,7 @@ import PageTable from '@/components/pagetable/PageTable.vue'
 import { TableColumn, TableQuery } from '@/components/pagetable'
 import { hasPerms } from '@/components/auth/auth'
 
-const RdsEdit = defineAsyncComponent(() => import('./rdsAdd.vue'))
+const DbEdit = defineAsyncComponent(() => import('./DbEdit.vue'))
 const CreateTable = defineAsyncComponent(() => import('./CreateTable.vue'))
 
 const perms = {
@@ -628,7 +627,7 @@ const filterTableInfos = computed(() => {
     return tnMatch && tcMatch
   })
 })
-//rds 有变动
+
 const search = async () => {
   try {
     pageTableRef.value.loading(true)

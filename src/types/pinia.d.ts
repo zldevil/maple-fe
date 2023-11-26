@@ -25,8 +25,6 @@ declare interface ThemeConfigState {
     isFixedHeader: boolean
     isFixedHeaderChange: boolean
     isClassicSplitMenu: boolean
-    isLockScreen: boolean
-    lockScreenTime: number
     isShowLogo: boolean
     isShowLogoChange: boolean
     isBreadcrumb: boolean
@@ -36,7 +34,6 @@ declare interface ThemeConfigState {
     isTagsviewIcon: boolean
     isCacheTagsView: boolean
     isSortableTagsView: boolean
-    isFooter: boolean
     isGrayscale: boolean
     isInvert: boolean
     isWartermark: boolean

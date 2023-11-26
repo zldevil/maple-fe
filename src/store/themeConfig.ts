@@ -55,10 +55,6 @@ export const useThemeConfig = defineStore('themeConfig', {
       isFixedHeaderChange: false,
       // 是否开启经典布局分割菜单（仅经典布局生效）
       isClassicSplitMenu: false,
-      // 是否开启自动锁屏
-      isLockScreen: false,
-      // 开启自动锁屏倒计时(s/秒)
-      lockScreenTime: 30,
 
       /* 界面显示
             ------------------------------- */

@@ -294,27 +294,6 @@
             </el-switch>
           </div>
         </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt15">
-          <div class="layout-breadcrumb-seting-bar-flex-label">开启锁屏</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-switch v-model="themeConfig.isLockScreen" @change="setLocalThemeConfig"></el-switch>
-          </div>
-        </div>
-        <div class="layout-breadcrumb-seting-bar-flex mt11">
-          <div class="layout-breadcrumb-seting-bar-flex-label">自动锁屏(s/秒)</div>
-          <div class="layout-breadcrumb-seting-bar-flex-value">
-            <el-input-number
-              v-model="themeConfig.lockScreenTime"
-              controls-position="right"
-              :min="0"
-              :max="9999"
-              @change="setLocalThemeConfig"
-              size="small"
-              style="width: 90px"
-            >
-            </el-input-number>
-          </div>
-        </div>
 
         <!-- 界面显示 -->
         <el-divider content-position="left">界面显示</el-divider>

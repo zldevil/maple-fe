@@ -3,9 +3,9 @@ import { dbApi } from '@/common/rdsApi'
 import { getTextWidth } from '@/common/utils/string'
 import SqlExecBox from './component/SqlExecBox'
 
-const dbInstCache: Map<number, DbInst> = new Map()
+const dbInstCache: Map<number, RdsIns> = new Map()
 
-export class DbInst {
+export class RdsIns {
   /**
    * 标签路径
    */
@@ -29,7 +29,7 @@ export class DbInst {
   /**
    * schema -> db
    */
-  dbs: Map<string, Db> = new Map()
+  dbs: Map<string, Rds> = new Map()
 
   /** 数据库schema，多个用空格隔开 */
   databases: string
@@ -53,7 +53,7 @@ export class DbInst {
       return db
     }
     console.info(`new db -> dbId: ${this.id}, dbName: ${dbName}`)
-    db = new Db()
+    db = new Rds()
     db.name = dbName
     this.dbs.set(dbName, db)
     return db
@@ -147,7 +147,7 @@ export class DbInst {
     condition: string,
     orderBy: string,
     pageNum: number,
-    limit: number = DbInst.DefaultLimit
+    limit: number = RdsIns.DefaultLimit
   ) {
     const baseSql = `SELECT * FROM ${table} ${condition ? 'WHERE ' + condition : ''} ${
       orderBy ? orderBy : ''
@@ -179,7 +179,7 @@ export class DbInst {
       for (let column of columns) {
         const colName = column.columnName
         colNames.push(colName)
-        values.push(DbInst.wrapValueByType(data[colName]))
+        values.push(RdsIns.wrapValueByType(data[colName]))
       }
       sqls.push(`INSERT INTO ${table} (${colNames.join(', ')}) VALUES(${values.join(', ')})`)
     }
@@ -195,7 +195,7 @@ export class DbInst {
     const primaryKey = this.getDb(db).getColumn(table)
     const primaryKeyColumnName = primaryKey.columnName
     const ids = datas
-      .map((d: any) => `${DbInst.wrapColumnValue(primaryKey.columnType, d[primaryKeyColumnName])}`)
+      .map((d: any) => `${RdsIns.wrapColumnValue(primaryKey.columnType, d[primaryKeyColumnName])}`)
       .join(',')
     return `DELETE FROM ${table} WHERE ${primaryKeyColumnName} IN (${ids})`
   }
@@ -227,7 +227,7 @@ export class DbInst {
       return dbInst
     }
     console.info(`new dbInst: ${inst.id}, tagPath: ${inst.tagPath}`)
-    dbInst = new DbInst()
+    dbInst = new RdsIns()
     dbInst.tagPath = inst.tagPath
     dbInst.id = inst.id
     dbInst.name = inst.name
@@ -244,7 +244,7 @@ export class DbInst {
    * @param dbType 第一次获取时为必传项，即第一次创建时
    * @returns 数据库实例
    */
-  static getInst(dbId?: number): DbInst {
+  static getInst(dbId?: number): RdsIns {
     if (!dbId) {
       throw new Error('dbId不能为空')
     }
@@ -350,7 +350,7 @@ export class DbInst {
 /**
  * 数据库实例信息
  */
-class Db {
+class Rds {
   name: string // 库名
   tables: [] // 数据库实例表信息
   columnsMap: Map<string, any> = new Map() // table -> columns
@@ -423,7 +423,7 @@ export class TabInfo {
   params: any
 
   getNowDbInst() {
-    return DbInst.getInst(this.dbId)
+    return RdsIns.getInst(this.dbId)
   }
 
   getNowDb() {
@@ -457,3 +457,8 @@ export type FieldsMeta = {
   // 新值
   newValue: string
 }
+
+//表信息
+//结构体
+//内容
+//操作入口最好在一块

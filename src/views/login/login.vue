@@ -99,7 +99,6 @@ import {
   setUserInfo2Session,
   setUseWatermark2Session
 } from '@/utils/storage'
-import { formatAxis } from '@/common/utils/format'
 import openApi from '@/utils/openApi'
 import { RsaEncrypt } from '@/common/rsa'
 import { LoginRes } from '@/common/login'
@@ -199,11 +198,6 @@ onMounted(async () => {
   })
   // 移除公钥, 方便后续重新获取
   sessionStorage.removeItem('RsaPublicKey')
-})
-
-// 时间获取
-const currentTime = computed(() => {
-  return formatAxis(new Date())
 })
 
 // 校验登录表单并登录
