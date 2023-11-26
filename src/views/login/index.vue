@@ -6,17 +6,11 @@
     <div class="login-content" :class="{ 'login-content-mobile': tabsActiveName === 'mobile' }">
       <div class="login-content-main">
         <h4 class="login-content-title"></h4>
-        <el-tabs v-model="tabsActiveName" @tab-click="onTabsClick">
-          <el-tab-pane label="账号密码登录" name="account" :disabled="tabsActiveName === 'account'">
-            <transition name="el-zoom-in-center">
-              <Account v-show="isTabPaneShow" ref="loginForm" />
-            </transition>
-          </el-tab-pane>
-        </el-tabs>
-        <div class="mt20" v-show="oauth2LoginConfig.enable">
-          <el-button link size="small">第三方登录: </el-button>
-          
-        </div>
+
+        maple! 账号密码登录
+        <transition name="el-zoom-in-center">
+          <Account v-show="isTabPaneShow" ref="loginForm" />
+        </transition>
       </div>
     </div>
     <!-- <div class="login-copyright">
@@ -27,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { toRefs, reactive, onMounted, ref } from 'vue'
+import { toRefs, reactive, ref } from 'vue'
 import Account from '@/views/login/login.vue'
 import { storeToRefs } from 'pinia'
 import { useThemeConfig } from '@/store/themeConfig'
@@ -35,27 +29,12 @@ import { useThemeConfig } from '@/store/themeConfig'
 const { themeConfig } = storeToRefs(useThemeConfig())
 const state = reactive({
   tabsActiveName: 'account',
-  isTabPaneShow: true, 
-  oauth2LoginConfig: {  
-    name: 'OAuth2登录',
-    enable: false
-  }
+  isTabPaneShow: true
 })
 
 const loginForm = ref<{ loginResDeal: (data: any) => void } | null>(null)
 
-const { isTabPaneShow, tabsActiveName, oauth2LoginConfig: oauth2LoginConfig } = toRefs(state)
-
-// 切换密码、手机登录
-const onTabsClick = () => {
-  state.isTabPaneShow = !state.isTabPaneShow
-}
-
-onMounted(async () => {
-  //state.oauth2LoginConfig = await openApi.oauth2LoginConfig();
-  state.oauth2LoginConfig.enable = false
-})
-
+const { isTabPaneShow, tabsActiveName } = toRefs(state)
 </script>
 
 <style scoped lang="scss">

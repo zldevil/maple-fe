@@ -44,38 +44,6 @@ class Api {
   static create(url: string, method: string): Api {
     return new Api(url, method)
   }
-
-  /**
-   * 创建get api
-   * @param url url
-   */
-  static newGet(url: string): Api {
-    return Api.create(url, 'get')
-  }
-
-  /**
-   * new post api
-   * @param url url
-   */
-  static newPost(url: string): Api {
-    return Api.create(url, 'post')
-  }
-
-  /**
-   * new put api
-   * @param url url
-   */
-  static newPut(url: string): Api {
-    return Api.create(url, 'put')
-  }
-
-  /**
-   * new delete api
-   * @param url url
-   */
-  static newDelete(url: string): Api {
-    return Api.create(url, 'delete')
-  }
 }
 
 export default Api

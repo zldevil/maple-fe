@@ -98,10 +98,11 @@ import {
   setSession,
   setUserInfo2Session,
   setUseWatermark2Session
-} from '@/common/utils/storage'
+} from '@/utils/storage'
 import { formatAxis } from '@/common/utils/format'
-import openApi from '@/common/openApi'
+import openApi from '@/utils/openApi'
 import { RsaEncrypt } from '@/common/rsa'
+import { LoginRes } from '@/common/login'
 import { getSecurity, useWartermark } from '@/common/sysconfig'
 import { letterAvatar } from '@/common/utils/string'
 import { useUserInfo } from '@/store/userInfo'
@@ -127,10 +128,7 @@ const state = reactive({
   captchaImage: '',
   loginForm: {
     username: '',
-    password: '',
-    captcha: '',
-    cid: '',
-    ldapLogin: false
+    password: ''
   },
   loginRes: {} as any,
   changePwdDialog: {
@@ -222,11 +220,11 @@ const login = () => {
 // 登录
 const onSignIn = async () => {
   state.loading.signIn = true
-  let loginRes
+  let loginRes: LoginRes
   const originPwd = state.loginForm.password
   try {
     const loginReq = { ...state.loginForm }
-    loginReq.password = await RsaEncrypt(originPwd)
+    // loginReq.password = await RsaEncrypt(originPwd)
     loginRes = await openApi.login(loginReq)
   } catch (e: any) {
     state.loading.signIn = false
@@ -246,13 +244,14 @@ const onSignIn = async () => {
   loginResDeal(loginRes)
 }
 
-const loginResDeal = (loginRes: any) => {
+//name,username ,
+
+const loginResDeal = (loginRes: LoginRes) => {
   state.loginRes = loginRes
   // 用户信息
   const userInfos = {
     name: loginRes.name,
     username: loginRes.username,
-    // 头像
     photo: letterAvatar(loginRes.username),
     time: new Date().getTime(),
     lastLoginTime: loginRes.lastLoginTime,
@@ -261,15 +260,10 @@ const loginResDeal = (loginRes: any) => {
 
   // 存储用户信息到浏览器缓存
   setUserInfo2Session(userInfos)
-  // 1、请注意执行顺序(存储用户信息到vuex)
+  // 1、请注意执行顺序(存储用户信息)
   useUserInfo().setUserInfo(userInfos)
 
-  const token = loginRes.token
-  // 如果不需要otp校验，则该token即为accessToken，否则为otp校验token
-  //不需要双因子校验
-
-  signInSuccess(token)
-  return
+  signInSuccess(loginRes.token)
 }
 
 // 登录成功后的跳转
@@ -281,28 +275,18 @@ const signInSuccess = async (accessToken: string = '') => {
   setSession('token', accessToken)
   // 初始化路由
   await initRouter()
-
-  // 判断是否为第一次oauth2登录，是的话需要用户填写姓名和用户名
-  if (state.loginRes.isFirstOauth2Login) {
-    state.baseInfoDialog.form.username = state.loginRes.username
-    state.baseInfoDialog.visible = true
-  } else {
-    await toIndex()
-  }
+  await toIndexPage()
 }
 
-const toIndex = async () => {
-  // 初始化登录成功时间问候语
-  let currentTimeInfo = currentTime.value
+//登录的同时获取到配置信息，没必要多次获取
+const toIndexPage = async () => {
   // 登录成功，跳到转首页
-  // 添加完动态路由，再进行 router 跳转，否则可能报错 No match found for location with path "/"
-  // 如果是复制粘贴的路径，非首页/登录页，那么登录成功后重定向到对应的路径中
   route.query?.redirect ? router.push(route.query.redirect as string) : router.push('/')
   // 登录成功提示
   setTimeout(async () => {
     // 关闭 loading
     state.loading.signIn = true
-    ElMessage.success(`${currentTimeInfo}，欢迎回来！`)
+    ElMessage.success(`登录成功`)
     if (await useWartermark()) {
       setUseWatermark2Session(true)
     }

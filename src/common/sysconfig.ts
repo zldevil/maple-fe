@@ -85,7 +85,3 @@ function convertBool(value: string, defaultValue: boolean) {
  *
  * @returns
  */
-export async function getLdapEnabled(): Promise<any> {
-  const value = await openApi.getLdapEnabled()
-  return convertBool(value, false)
-}

@@ -6,11 +6,9 @@ import { useUserInfo } from '@/store/userInfo'
 import { useRoutesList } from '@/store/routesList'
 import { useKeepALiveNames } from '@/store/keepAliveNames'
 
-
-
 const router = createRouter({
   history: createWebHistory(),
-  routes: staticRoutes,
+  routes: staticRoutes
 })
 
 export default router
@@ -32,7 +30,8 @@ export async function initRouter() {
 export function initAllFun() {
   router.addRoute(pathMatch) // 添加404界面
   // 添加动态路由
-  setFilterRouteEnd().forEach((route: any) => {
+  const routerArr = setFilterRouteEnd()
+  routerArr.forEach((route: any) => {
     router.addRoute(route as unknown as RouteRecordRaw)
   })
   // 过滤权限菜单
@@ -43,7 +42,8 @@ export function initAllFun() {
 
 // 比对后的路由表，进行重新赋值
 export function setFilterRouteEnd() {
-  let filterRouteEnd: any = formatTwoStageRoutes(formatFlatteningRoutes(dynamicRoutes))
+  const res = formatFlatteningRoutes(dynamicRoutes)
+  let filterRouteEnd: any = formatTwoStageRoutes(res)
   filterRouteEnd[0].children = setFilterRoute(filterRouteEnd[0].children)
   return filterRouteEnd
 }
@@ -92,7 +92,7 @@ export function formatTwoStageRoutes(arr: any) {
         path: v.path,
         redirect: v.redirect,
         meta: v.meta,
-        children: []
+        children: v.children
       })
     } else {
       newArr[0].children.push({ ...v })
@@ -106,7 +106,7 @@ export function formatTwoStageRoutes(arr: any) {
 }
 
 // 递归过滤有权限的路由
-export function setFilterMenuFun(routes: any, menus: any) {
+export function setFilterMenuFun(routes: any, menus: any): any {
   const menu: any = []
   routes.forEach((route: any) => {
     const item = { ...route }
@@ -121,17 +121,15 @@ export function setFilterMenuFun(routes: any, menus: any) {
 }
 
 // 判断路由code 是否包含当前登录用户menus字段中，menus为字符串code数组
-export function hasAnth(menus: any, route: any) {
+export function hasAnth(menus: any, route: any): boolean {
   if (route.meta && route.meta.code) {
     return menus.includes(route.meta.code)
   }
   return true
 }
 
-
-
 // 路由加载前
 router.beforeEach(async (to, from, next) => {
-    console.log("路由调用之前")
-    next();
-});
+  console.log('路由调用之前')
+  next()
+})

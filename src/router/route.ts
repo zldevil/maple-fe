@@ -11,22 +11,31 @@ export const dynamicRoutes = [
     meta: {
       isKeepAlive: true
     },
-    // children: [],
     children: [
-      // {
-      //     path: '/home',
-      //     name: 'home',
-      //     component: () => import('@/views/home/Home.vue'),
-      //     meta: {
-      //         title: '首页',
-      //         link: '',
-      //         isHide: false,
-      //         isKeepAlive: true,
-      //         isAffix: true,
-      //         isIframe: false,
-      //         icon: 'el-icon-s-home',
-      //     },
-      // },
+      {
+        path: '/home',
+        name: 'home',
+        component: () => import('@/views/home/Home.vue'),
+        meta: {
+          title: '首页',
+          link: '',
+          isHide: false,
+          isKeepAlive: true,
+          isAffix: true,
+          isIframe: false,
+          icon: 'el-icon-s-home'
+        }
+      },
+      {
+        path: '/personal',
+        name: 'personal',
+        component: () => import('@/views/personal/index.vue'),
+        meta: {
+          title: '个人中心',
+          isKeepAlive: true,
+          icon: 'el-icon-user'
+        }
+      }
       // {
       //     path: '/sys',
       //     name: 'Resource',
@@ -71,16 +80,6 @@ export const dynamicRoutes = [
       //             },
       //         },
       //     ],
-      // },
-      // {
-      //     path: '/personal',
-      //     name: 'personal',
-      //     component: () => import('@/views/personal/index.vue'),
-      //     meta: {
-      //         title: '个人中心',
-      //         isKeepAlive: true,
-      //         icon: 'el-icon-user',
-      //     },
       // },
     ]
   }

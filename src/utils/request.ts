@@ -39,13 +39,13 @@ function notifyErrorMsg(msg: string) {
 }
 
 // create an axios instance
-const service = Axios.create({
+const axios = Axios.create({
   baseURL: baseUrl, // url = base url + request url
   timeout: 20000 // request timeout
 })
 
 // request interceptor
-service.interceptors.request.use(
+axios.interceptors.request.use(
   (config: any) => {
     // do something before request is sent
     const token = getSession('token')
@@ -61,7 +61,7 @@ service.interceptors.request.use(
 )
 
 // response interceptor
-service.interceptors.response.use(
+axios.interceptors.response.use(
   (response) => {
     // 获取请求返回结果
     const data: Result = response.data
@@ -143,7 +143,7 @@ function request(
   } else {
     query.params = params
   }
-  return service
+  return axios
     .request(query)
     .then((res) => res)
     .catch((e) => {
