@@ -1,5 +1,4 @@
 <template>
-  <!--  -->
   <div
     style="
       display: inline-flex;
@@ -72,6 +71,9 @@ const showTagInfo = async () => {
   }
   state.tags = await tagApi.listByQuery.request({ tagPaths: tagPaths.join(',') })
 }
+
+//这个tag info没必要展示啊，没用
+//
 </script>
 
 <style lang="scss"></style>

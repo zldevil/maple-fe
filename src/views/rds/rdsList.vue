@@ -435,7 +435,7 @@ import { TableColumn, TableQuery } from '@/components/pagetable'
 import { hasPerms } from '@/components/auth/auth'
 
 const RdsEdit = defineAsyncComponent(() => import('./rdsAdd.vue'))
-const CreateTable = defineAsyncComponent(() => import('./CreateTable.vue'))
+const CreateTable = defineAsyncComponent(() => import('./tableAdd.vue'))
 
 const perms = {
   saveDb: 'db:save',
@@ -923,5 +923,6 @@ const openEditTable = async (row: any) => {
     state.tableCreateDialog.data = { edit: true, row, indexs, columns }
   }
 }
+//链接下有哪些数据库, 然后对数据库做操作
 </script>
 <style lang="scss"></style>

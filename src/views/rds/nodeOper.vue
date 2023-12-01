@@ -18,6 +18,22 @@
         >
           表信息
         </el-button>
+        <el-button
+          type="primary"
+          icon="plus"
+          @click="addQueryTab({ id: nowDbInst.id, dbs: nowDbInst.databases }, state.db)"
+          size="small"
+        >
+          结构
+        </el-button>
+        <el-button
+          type="primary"
+          icon="plus"
+          @click="addQueryTab({ id: nowDbInst.id, dbs: nowDbInst.databases }, state.db)"
+          size="small"
+        >
+          内容
+        </el-button>
       </el-col>
     </el-row>
     <el-row type="flex">
@@ -27,8 +43,8 @@
           @node-click="nodeClick"
           :load="loadNode"
           :load-contextmenu-items="getContextmenuItems"
-          @current-contextmenu-click="onCurrentContextmenuClick"
           :height="state.tagTreeHeight"
+          @current-contextmenu-click="onCurrentContextmenuClick"
         >
           <template #prefix="{ data }">
             <span v-if="data.type == NodeType.DbInst">
@@ -55,9 +71,9 @@
                 <template #default>
                   <el-form class="instances-pop-form" label-width="55px" :size="'small'">
                     <el-form-item label="类型:">{{ data.params.type }}</el-form-item>
-                    <el-form-item label="链接:"
-                      >{{ data.params.host }}:{{ data.params.port }}</el-form-item
-                    >
+                    <el-form-item label="链接:">
+                      {{ data.params.host }}:{{ data.params.port }}
+                    </el-form-item>
                     <el-form-item label="用户:">{{ data.params.username }}</el-form-item>
                     <el-form-item v-if="data.params.remark" label="备注:">{{
                       data.params.remark
@@ -68,7 +84,6 @@
             </span>
 
             <SvgIcon v-if="data.type == NodeType.Db" name="Coin" color="#67c23a" />
-
             <SvgIcon name="Calendar" v-if="data.type == NodeType.TableMenu" color="#409eff" />
 
             <el-tooltip
@@ -144,9 +159,9 @@ import { language as addSqlLanguage } from './lang/mysql.js'
 import * as monaco from 'monaco-editor'
 import { editor, languages, Position } from 'monaco-editor'
 
-import { RdsIns, TabInfo, TabType } from './db'
+import { RdsIns, TabInfo, TabType } from './rds'
 import { TagTreeNode } from '../component/tag'
-import TagTree from '../component/TagTree.vue'
+import TagTree from '@/views/component/TagTree.vue'
 import { dbApi } from '@/common/rdsApi'
 import { NodeType } from '@/common/rdsNode'
 
@@ -163,17 +178,7 @@ const sqlCompletionBuiltinVariables = [
   ...sqlLanguage.builtinVariables,
   ...addSqlLanguage.builtinVariables
 ]
-/**
- * 树节点类型
- */
-class NodeType {
-  static DbInst = 1
-  static Db = 2
-  static TableMenu = 3
-  static SqlMenu = 4
-  static Table = 5
-  static Sql = 6
-}
+
 class ContextmenuClickId {
   static ReloadTable = 0
 }
@@ -883,3 +888,4 @@ select * from invisit v where`.match(/(join|from)\s+(\w*-?\w*\.?\w+)\s*(as)?\s*(
   }
 }
 </style>
+./rds.js

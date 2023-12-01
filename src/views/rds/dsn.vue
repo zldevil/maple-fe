@@ -1,5 +1,6 @@
 <template>
   <div class="db-list">
+    <!-- dsn链接管理,列表查询，-->
     <page-table
       ref="pageTableRef"
       :query="queryConfig"
@@ -434,7 +435,7 @@ import { TableColumn, TableQuery } from '@/components/pagetable'
 import { hasPerms } from '@/components/auth/auth'
 
 const DbEdit = defineAsyncComponent(() => import('./DbEdit.vue'))
-const CreateTable = defineAsyncComponent(() => import('./CreateTable.vue'))
+const CreateTable = defineAsyncComponent(() => import('./tableAdd.vue'))
 
 const perms = {
   saveDb: 'db:save',
