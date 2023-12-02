@@ -43,7 +43,7 @@
       </template>
 
       <template #tagPath="{ data }">
-        <tag-info :tag-path="data.tagPath" />
+        <!-- <tag-info :tag-path="data.tagPath" />  -->
         <span class="ml5">
           {{ data.tagPath }}
         </span>
@@ -429,12 +429,11 @@ import { getSession } from '@/common/utils/storage'
 import { isTrue } from '@/common/assert'
 import { Search as SearchIcon } from '@element-plus/icons-vue'
 import { dateFormat } from '@/common/utils/date'
-import TagInfo from '../component/TagInfo.vue'
 import PageTable from '@/components/pagetable/PageTable.vue'
 import { TableColumn, TableQuery } from '@/components/pagetable'
 import { hasPerms } from '@/components/auth/auth'
 
-const DbEdit = defineAsyncComponent(() => import('./DbEdit.vue'))
+const DbEdit = defineAsyncComponent(() => import('./rdsAdd.vue'))
 const CreateTable = defineAsyncComponent(() => import('./tableAdd.vue'))
 
 const perms = {
