@@ -6,77 +6,46 @@ export const dynamicRoutes = [
   {
     path: '/',
     name: '/',
-    componexnt: Layout,
+    component: Layout,
     redirect: '/home',
     meta: {
       isKeepAlive: true
     },
-    children: [
-      {
-        path: '/home',
-        name: 'home',
-        component: () => import('@/views/home/Home.vue'),
-        meta: {
-          title: '首页',
-          link: '',
-          isHide: false,
-          isKeepAlive: true,
-          isAffix: true,
-          isIframe: false,
-          icon: 'el-icon-s-home'
-        }
-      },
-      {
-        path: '/sys',
-        name: 'Resource',
-        redirect: '/sys/resources',
-        meta: {
-          title: '系统管理',
-          code: 'sys',
-          icon: 'el-icon-monitor'
-        },
-        children: [
-          {
-            path: 'sys/resources',
-            name: 'ResourceList',
-            component: () => import('@/views/system/resource'),
-            meta: {
-              title: '资源管理',
-              code: 'resource:list',
-              isKeepAlive: true,
-              icon: 'el-icon-menu'
-            }
-          },
-          {
-            path: 'sys/roles',
-            name: 'RoleList',
-            component: () => import('@/views/system/role'),
-            meta: {
-              title: '角色管理',
-              code: 'role:list',
-              isKeepAlive: true,
-              icon: 'el-icon-menu'
-            }
-          },
-          {
-            path: 'sys/accounts',
-            name: 'ResourceList',
-            component: () => import('@/views/system/account'),
-            meta: {
-              title: '账号管理',
-              code: 'account:list',
-              isKeepAlive: true,
-              icon: 'el-icon-menu'
-            }
-          }
-        ]
-      }
-    ]
+    children: []
   }
 ]
 
 // 定义静态路由
 export const staticRoutes: Array<RouteRecordRaw> = [
+  // {·
+  //   path: '/',
+  //   name: '/',
+  //   component: Layout,
+  //   redirect: '/home',
+  //   meta: {
+  //     isKeepAlive: true
+  //   },
+  //   children: [
+  //     {
+  //       path: '/home',
+  //       name: 'home',
+  //       component: ()=> import('@/views/home/.vue'),
+  //       redirect: '/home',
+  //       meta: {
+  //         isKeepAlive: true
+  //       },
+  //       children: []
+  //     },
+  //     {
+  //       path: '/rds',
+  //       name: 'home',
+  //       component: () => import('@/views/rds/dsn.vue'),
+  //       meta: {
+  //         title: 'rds'
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: '/login',
     name: 'login',
@@ -86,27 +55,19 @@ export const staticRoutes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/',
-    name: 'home',
-    component: () => import('@/views/home/Home.vue'),
-    meta: {
-      title: 'home'
-    }
-  },
-  {
-    path: '/rds',
-    name: 'home',
-    component: () => import('@/views/rds/dsn.vue'),
-    meta: {
-      title: 'rds'
-    }
-  },
-  {
     path: '/event',
     name: 'event',
     component: () => import('@/views/event/index.vue'),
     meta: {
       title: 'home'
+    }
+  },
+  {
+    path: '/404',
+    name: 'notFound',
+    component: () => import('@/views/error/404.vue'),
+    meta: {
+      title: '找不到此页面'
     }
   }
 ]
