@@ -32,7 +32,7 @@ router.beforeEach(async (to, from, next) => {
   console.log('路由调用之前，打个日志，证明进来了')
 
   const token = getSession('token')
-  if ((to.path === '/login' || to.path == '/oauth2/callback') && !token) {
+  if (to.path === '/login' && !token) {
     next()
     return
   }
