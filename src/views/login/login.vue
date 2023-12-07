@@ -7,10 +7,11 @@
       class="login-content-form"
       size="large"
     >
+      账号：
       <el-form-item prop="username">
         <el-input
           type="text"
-          placeholder="请输入用户名"
+          placeholder="请输入账号"
           prefix-icon="user"
           v-model="loginForm.username"
           clearable
@@ -18,6 +19,7 @@
         >
         </el-input>
       </el-form-item>
+      密码：
       <el-form-item prop="password">
         <el-input
           type="password"

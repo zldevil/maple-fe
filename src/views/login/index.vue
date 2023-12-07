@@ -6,17 +6,11 @@
     <div class="login-content" :class="{ 'login-content-mobile': tabsActiveName === 'mobile' }">
       <div class="login-content-main">
         <h4 class="login-content-title"></h4>
-
-        maple! 账号密码登录
         <transition name="el-zoom-in-center">
           <Account v-show="isTabPaneShow" ref="loginForm" />
         </transition>
       </div>
     </div>
-    <!-- <div class="login-copyright">
-            <div class="mb5 login-copyright-company">arcana</div>
-            <div class="login-copyright-msg">arcana</div>
-        </div> -->
   </div>
 </template>
 

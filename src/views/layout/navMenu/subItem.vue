@@ -22,25 +22,11 @@
   </template>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed, defineProps } from 'vue'
 import SvgIcon from '@/components/svgIcon/index.vue'
-export default defineComponent({
-  name: 'navMenuSubItem',
-  props: {
-    chil: {
-      type: Array,
-      default: () => []
-    }
-  },
-  setup(props) {
-    // 获取父级菜单数据
-    const chils = computed(() => {
-      return props.chil as any
-    })
-    return {
-      chils
-    }
-  }
-})
+
+// 获取父级菜单数据
+const props = defineProps(['chil'])
+const chils = computed(() => props.chil as any)
 </script>

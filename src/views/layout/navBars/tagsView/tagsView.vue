@@ -71,8 +71,7 @@ import {
   onBeforeUpdate,
   onBeforeMount,
   onUnmounted,
-  getCurrentInstance,
-  watch
+  getCurrentInstance
 } from 'vue'
 import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
 import screenfull from 'screenfull'

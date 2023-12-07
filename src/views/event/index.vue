@@ -24,7 +24,7 @@
           </el-table-column>
         </el-table>
       </el-col>
-      <el-col :span="10">
+      <el-col :span="14">
         <div class="gantt-target"></div>
       </el-col>
     </el-row>
@@ -42,29 +42,38 @@ export default {
         // 表格数据
         {
           start: '2023-04-01 10:00:00',
-          end: '2023-04-01 11:00:00',
-          name: '测试任务1',
+          end: '2023-04-011 11:00:00',
+          name: '上线1',
           id: '1',
-          progress: 26,
+          progress: 100,
           task: '50%',
           children: []
         },
         {
-          start: '2023-04-01 10:00:00',
-          end: '2023-04-01 10:10:00',
+          start: '2023-04-04 10:00:00',
+          end: '2023-04-10 10:10:00',
           name: '测试任务1',
           id: '2',
-          progress: 26,
+          progress: 100,
           task: '50%',
           children: []
         },
         {
-          start: '2023-04-01 10:00:00',
-          end: '2023-04-01 10:10:00',
+          start: '2023-04-03 10:00:00',
+          end: '2023-04-08 10:10:00',
           name: '测试任务1',
           id: '3',
-          progress: 26,
+          progress: 100,
           task: '50%',
+          children: []
+        },
+        {
+          start: '2023-04-02 10:00:00',
+          end: '2023-04-10 10:10:00',
+          name: '测试任务1',
+          id: '3',
+          progress: 100,
+          task: '100%',
           children: []
         }
       ],
@@ -171,11 +180,11 @@ export default {
         },
 
         language: 'zh',
-        header_height: 50,
+        header_height: 70,
         column_width: 30,
         step: 24,
         // view_modes: ['Quarter Day', 'Half Day', 'Day', 'Week', 'Month'],
-        bar_height: 20,
+        bar_height: 60,
         bar_corner_radius: 5, // bar 的圆角度
         arrow_curve: 20, //连接子任务的线条曲线度
         padding: 18,

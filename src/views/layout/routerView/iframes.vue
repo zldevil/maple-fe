@@ -21,8 +21,7 @@ import {
   onMounted,
   onBeforeMount,
   onUnmounted,
-  nextTick,
-  getCurrentInstance
+  nextTick
 } from 'vue'
 import { useRoute } from 'vue-router'
 import mittBus from '@/common/utils/mitt'

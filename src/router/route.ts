@@ -17,35 +17,6 @@ export const dynamicRoutes = [
 
 // 定义静态路由
 export const staticRoutes: Array<RouteRecordRaw> = [
-  // {·
-  //   path: '/',
-  //   name: '/',
-  //   component: Layout,
-  //   redirect: '/home',
-  //   meta: {
-  //     isKeepAlive: true
-  //   },
-  //   children: [
-  //     {
-  //       path: '/home',
-  //       name: 'home',
-  //       component: ()=> import('@/views/home/.vue'),
-  //       redirect: '/home',
-  //       meta: {
-  //         isKeepAlive: true
-  //       },
-  //       children: []
-  //     },
-  //     {
-  //       path: '/rds',
-  //       name: 'home',
-  //       component: () => import('@/views/rds/dsn.vue'),
-  //       meta: {
-  //         title: 'rds'
-  //       }
-  //     }
-  //   ]
-  // },
   {
     path: '/login',
     name: 'login',

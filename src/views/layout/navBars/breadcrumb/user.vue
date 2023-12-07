@@ -28,34 +28,6 @@
         <search />
       </el-icon>
     </div>
-    <div class="layout-navbars-breadcrumb-user-icon" @click="onLayoutSetingClick">
-      <el-icon title="布局设置">
-        <setting />
-      </el-icon>
-    </div>
-    <div class="layout-navbars-breadcrumb-user-icon">
-      <el-popover
-        placement="bottom"
-        trigger="click"
-        :visible="state.isShowUserNewsPopover"
-        :width="300"
-        popper-class="el-popover-pupop-user-news"
-      >
-        <template #reference>
-          <el-badge
-            :is-dot="false"
-            @click="state.isShowUserNewsPopover = !state.isShowUserNewsPopover"
-          >
-            <el-icon title="消息">
-              <bell />
-            </el-icon>
-          </el-badge>
-        </template>
-        <transition name="el-zoom-in-top">
-          <UserNews v-show="state.isShowUserNewsPopover" />
-        </transition>
-      </el-popover>
-    </div>
     <div class="layout-navbars-breadcrumb-user-icon mr10" @click="onScreenfullClick">
       <el-icon v-if="!state.isScreenfull" title="关全屏">
         <full-screen />
@@ -73,7 +45,6 @@
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item command="/home">首页</el-dropdown-item>
-          <el-dropdown-item command="/personal">个人中心</el-dropdown-item>
           <el-dropdown-item divided command="logOut">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </template>
@@ -91,9 +62,7 @@ import { storeToRefs } from 'pinia'
 import { useUserInfo } from '@/store/userInfo'
 import { useThemeConfig } from '@/store/themeConfig'
 import { clearSession, setLocal, getLocal, removeLocal } from '@/common/utils/storage'
-import UserNews from '@/views/layout/navBars/breadcrumb/userNews.vue'
 import SearchMenu from '@/views/layout/navBars/breadcrumb/search.vue'
-import mittBus from '@/common/utils/mitt'
 import openApi from '@/common/openApi'
 
 const router = useRouter()
@@ -129,10 +98,7 @@ const onScreenfullClick = () => {
   screenfull.toggle()
   state.isScreenfull = !state.isScreenfull
 }
-// 布局配置 icon 点击时
-const onLayoutSetingClick = () => {
-  mittBus.emit('openSetingsDrawer')
-}
+
 // 下拉菜单点击时
 const onHandleCommandClick = (path: string) => {
   if (path === 'logOut') {
