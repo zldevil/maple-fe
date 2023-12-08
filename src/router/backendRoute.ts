@@ -6,6 +6,7 @@ import { useRoutesList } from '@/store/routesList'
 import openApi from '@/utils/openApi'
 import { type RouteRecordRaw } from 'vue-router'
 import { useKeepALiveNames } from '@/store/keepAliveNames'
+import { Menu } from '@/common/menu'
 
 const viewsModules: any = import.meta.glob([
   '../views/**/*.{vue,tsx}',
@@ -22,17 +23,25 @@ export async function initBackEndControlRoutesFun() {
   }
   //useUserInfo().setUserInfo({})
   // 获取路由
-  let menuRoute = await getBackEndControlRoutes()
+  let menuRoute: Menu = await getBackEndControlRoutes()
   dynamicRoutes[0].children = backEndRouterConverter(menuRoute) // 处理路由（component）
   // 添加404界面
   router.addRoute(pathMatch)
   resetRoute() // 删除/重置路由
-  // 添加动态路由
-  const res = formatFlatteningRoutes(dynamicRoutes)
-  formatTwoStageRoutes(res).forEach((route: any) => {
+
+  console.log('dynamicRoutes : ', dynamicRoutes)
+  dynamicRoutes.forEach((route: any) => {
     router.addRoute(route as unknown as RouteRecordRaw)
   })
   useRoutesList().setRoutesList(dynamicRoutes[0].children)
+
+  // const res = formatFlatteningRoutes(dynamicRoutes)
+  // console.log('res : ', res)
+  // const formartRoutes = formatTwoStageRoutes(res)
+  // console.log('routes : ', formartRoutes)
+  // formartRoutes.forEach((route: any) => {
+  //   router.addRoute(route as unknown as RouteRecordRaw)
+  // })
 }
 
 // 多级嵌套数组处理成一维数组
@@ -88,7 +97,6 @@ export async function getBackEndControlRoutes() {
   }
 }
 
-//就是
 // 后端控制路由，后端返回路由 转换为vue route
 export function backEndRouterConverter(routes: any, parentPath: string = '/') {
   if (!routes) return

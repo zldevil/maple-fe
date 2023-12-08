@@ -12,9 +12,8 @@
       <div style="float: right">
         <el-tooltip effect="dark" placement="top">
           <template #content>
-            1. 用于归类
-            <br />2. 可在团队管理中进行分配，用于隔离 <br />
-            3.拥有父标签的团队成员可访问操作其自身或子标签关联的资源
+            <br />1. 数据隔离管理 <br />
+            <br />2. 有父标签的团队成员可访问操作其自身或子标签关联的资源 <br />
           </template>
           <span
             >标签作用<el-icon>

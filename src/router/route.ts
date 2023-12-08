@@ -34,6 +34,14 @@ export const staticRoutes: Array<RouteRecordRaw> = [
     }
   },
   {
+    path: '/group',
+    name: 'group',
+    component: () => import('@/views/group/TagTreeList.vue'),
+    meta: {
+      title: 'home'
+    }
+  },
+  {
     path: '/404',
     name: 'notFound',
     component: () => import('@/views/error/404.vue'),

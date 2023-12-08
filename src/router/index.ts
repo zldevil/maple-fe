@@ -15,21 +15,14 @@ export default router
 
 // login 时调用
 export async function initRouter() {
-  // 初始化方法执行
-  const isInit = useThemeConfig(pinia).themeConfig.isRequestRoutes
-  if (!isInit) {
-    // 未开启后端控制路由
-  } else if (isInit) {
-    // 后端控制路由，isRequestRoutes 为 true，则开启后端控制路由
-    await initBackEndControlRoutesFun()
-  }
+  await initBackEndControlRoutesFun()
 }
 
 let loadRouter = false
 
 // 路由加载前
 router.beforeEach(async (to, from, next) => {
-  console.log('路由调用之前，打个日志，证明进来了')
+  console.log('路由调用之前，打个日志，证明进来了 ,to path: %s', to.path)
 
   const token = getSession('token')
   if (to.path === '/login' && !token) {
