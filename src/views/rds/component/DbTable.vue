@@ -45,7 +45,7 @@
 
 <script lang="ts" setup>
 import { onMounted, watch, reactive, toRefs } from 'vue'
-import { DbInst, type UpdateFieldsMeta, type FieldsMeta } from '../db'
+import { RdsIns as DbInst, type UpdateFieldsMeta, type FieldsMeta } from '../rds'
 
 const emits = defineEmits(['sortChange', 'deleteData', 'selectionChange', 'changeUpdatedField'])
 

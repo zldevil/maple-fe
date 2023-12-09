@@ -223,7 +223,7 @@ import { onMounted, watch, reactive, toRefs, ref } from 'vue'
 import { isTrue, notEmpty, notBlank } from '@/common/assert'
 import { ElMessage } from 'element-plus'
 
-import { RdsIns, TabInfo } from '../../db'
+import { RdsIns, TabInfo } from '../../rds'
 import { exportCsv } from '@/common/utils/export'
 import { dateStrFormat } from '@/utils/date'
 import DbTable from '../DbTable.vue'

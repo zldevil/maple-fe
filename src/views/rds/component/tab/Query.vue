@@ -131,7 +131,7 @@ import { editor } from 'monaco-editor'
 // 主题例子 https://editor.bitwiser.in/
 import SolarizedLight from 'monaco-themes/themes/Solarized-light.json'
 import DbTable from '../DbTable.vue'
-import { TabInfo } from '../../db'
+import { TabInfo } from '../../rds'
 import { exportCsv } from '@/utils/export'
 import { dateStrFormat } from '@/utils/date'
 import { dbApi } from '@/common/rdsApi'
