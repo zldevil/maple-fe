@@ -106,7 +106,7 @@
           <el-input v-model="saveTabDialog.form.remark" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="团队:">
-          <el-input v-model="saveTabDialog.form.remark" auto-complete="off"></el-input>
+          <el-input v-model="saveTabDialog.form.teamIds" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -153,7 +153,7 @@ const state = reactive({
   saveTabDialog: {
     title: '新增标签',
     visible: false,
-    form: { id: 0, pid: 0, code: '', name: '', remark: '' }
+    form: { id: 0, pid: 0, code: '', name: '', remark: '', teamIds: [] }
   },
   infoDialog: {
     title: '',

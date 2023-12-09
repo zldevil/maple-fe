@@ -7,7 +7,7 @@ export const dynamicRoutes = [
     path: '/',
     name: '/',
     component: Layout,
-    redirect: '/home',
+    redirect: '/tag/tag-trees',
     meta: {
       isKeepAlive: true
     },
