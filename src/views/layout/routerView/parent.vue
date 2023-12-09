@@ -1,25 +1,21 @@
 <template>
   <div class="h100">
     <router-view v-slot="{ Component }">
-      <transition :name="setTransitionName" mode="out-in">
-        <keep-alive :include="state.keepAliveNameList">
-          <component :is="Component" :key="state.refreshRouterViewKey" class="w100" />
-        </keep-alive>
-      </transition>
+      <keep-alive :include="state.keepAliveNameList">
+        <component :is="Component" :key="state.refreshRouterViewKey" class="w100" />
+      </keep-alive>
     </router-view>
   </div>
 </template>
 
 <script lang="ts" setup name="layoutParentView">
-import { computed, reactive, onBeforeMount, onUnmounted, nextTick } from 'vue'
+import { reactive, onBeforeMount, onUnmounted, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useThemeConfig } from '@/store/themeConfig'
 import { useKeepALiveNames } from '@/store/keepAliveNames'
 import mittBus from '@/common/utils/mitt'
 
 const route = useRoute()
-const { themeConfig } = storeToRefs(useThemeConfig())
 const { keepAliveNames } = storeToRefs(useKeepALiveNames())
 const state: any = reactive({
   refreshRouterViewKey: null,
@@ -43,10 +39,7 @@ onBeforeMount(() => {
     })
   })
 })
-// 设置主界面切换动画
-const setTransitionName = computed(() => {
-  return themeConfig.value.animation
-})
+
 // 页面卸载时
 onUnmounted(() => {
   mittBus.off('onTagsViewRefreshRouterView')

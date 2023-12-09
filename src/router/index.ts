@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { staticRoutes } from './route'
-import pinia from '@/store/index'
-import { useThemeConfig } from '@/store/themeConfig'
 import { initBackEndControlRoutesFun, resetRoute } from './backendRoute'
 import { getSession, clearSession } from '@/common/utils/storage'
 import { useRoutesList } from '@/store/routesList'

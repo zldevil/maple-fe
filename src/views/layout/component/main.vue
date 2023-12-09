@@ -4,7 +4,7 @@
       class="layout-scrollbar"
       ref="layoutScrollbarRef"
       v-show="!state.currentRouteMeta.link && state.currentRouteMeta.linkType != 1"
-      :style="{ minHeight: `calc(100vh - ${state.headerHeight}` }"
+      :style="{ minHeight: `calc(100vh - ${state.headerHeight}）` }"
     >
       <LayoutParentView />
     </el-scrollbar>
@@ -55,11 +55,12 @@ const initCurrentRouteMeta = (meta: object) => {
 // 设置 main 的高度
 const initHeaderHeight = () => {
   let { isTagsview } = themeConfig.value
-  if (isTagsview) return (state.headerHeight = `84px`)
-  else return (state.headerHeight = `50px`)
+  state.headerHeight = isTagsview ? '84px' : '50px'
 }
+
 // 页面加载前
 onBeforeMount(() => {
+  console.log('route meta:', route.meta)
   initCurrentRouteMeta(route.meta)
   initHeaderHeight()
 })

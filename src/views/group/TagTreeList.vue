@@ -12,8 +12,8 @@
       <div style="float: right">
         <el-tooltip effect="dark" placement="top">
           <template #content>
-            <br />1. 数据隔离管理 <br />
-            <br />2. 有父标签的团队成员可访问操作其自身或子标签关联的资源 <br />
+            1. 数据隔离管理
+            <br />2. 父标签的成员可操作自身或子标签关联的资源 <br />
           </template>
           <span
             >标签作用<el-icon>
@@ -71,28 +71,6 @@
             type="success"
             class="ml5"
           />
-
-          <!-- <el-link
-                        v-auth="'resource:changeStatus'"
-                        @click.prevent="changeStatus(data, -1)"
-                        v-if="data.status === 1 && data.type === enums.ResourceTypeEnum.PERMISSION.value"
-                        icon="circle-close"
-                        :underline="false"
-                        type="warning"
-                        class="ml5"
-                    />
-
-                    <el-link
-                        v-auth="'resource:changeStatus'"
-                        @click.prevent="changeStatus(data, 1)"
-                        v-if="data.status === -1 && data.type === enums.ResourceTypeEnum.PERMISSION.value"
-                        type="success"
-                        icon="circle-check"
-                        :underline="false"
-                        plain
-                        class="ml5"
-                    /> -->
-
           <el-link
             v-auth="'tag:del'"
             @click.prevent="deleteTag(data)"
