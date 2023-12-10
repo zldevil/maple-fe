@@ -46,7 +46,7 @@
                 class="ml5"
               />
             </el-col>
-            <el-col :span="18">
+            <el-col :span="10">
               <el-input
                 @clear="clear"
                 v-model="scanParam.match"
@@ -56,7 +56,7 @@
                 class="ml10"
               />
             </el-col>
-            <el-col :span="4">
+            <el-col :span="2">
               <el-button
                 class="ml15"
                 :disabled="!scanParam.id || !scanParam.db"
@@ -67,10 +67,8 @@
                 plain
               ></el-button>
             </el-col>
-          </el-row>
 
-          <el-row class="mb5 mt5">
-            <el-col :span="19">
+            <el-col :span="2">
               <el-button
                 class="ml5"
                 :disabled="!scanParam.id || !scanParam.db"
@@ -79,9 +77,10 @@
                 icon="more"
                 size="small"
                 plain
-                >加载更多</el-button
+                >load</el-button
               >
-
+            </el-col>
+            <el-col :span="2">
               <el-button
                 v-auth="'redis:data:save'"
                 :disabled="!scanParam.id || !scanParam.db"
@@ -90,9 +89,10 @@
                 icon="plus"
                 size="small"
                 plain
-                >新增key</el-button
+                >key</el-button
               >
-
+            </el-col>
+            <el-col :span="2">
               <el-button
                 :disabled="!scanParam.id || !scanParam.db"
                 @click="flushDb"
@@ -104,13 +104,8 @@
                 >flush</el-button
               >
             </el-col>
-
-            <!-- 
-                        <el-col :span="5">
-                            <span style="display: inline-block" class="mt5">keys:{{ state.dbsize }}</span>
-                        </el-col>
-                        -->
           </el-row>
+
           <!-- 展示redis key信息 -->
 
           <el-table
@@ -147,7 +142,35 @@
               </template>
             </el-table-column>
           </el-table>
+          <!-- 展示快捷按钮-->
+          <el-row class="mb5 mt5">
+            <el-button
+              class="ml5"
+              :disabled="!scanParam.id || !scanParam.db"
+              @click="scan(true)"
+              type="primary"
+              icon="more"
+              size="small"
+              plain
+              >CLI</el-button
+            >
+            <el-button
+              v-auth="'redis:data:save'"
+              :disabled="!scanParam.id || !scanParam.db"
+              @click="showNewKeyDialog"
+              type="primary"
+              icon="plus"
+              size="small"
+              plain
+              >command helper</el-button
+            >
 
+            <!-- 
+                        <el-col :span="5">
+                            <span style="display: inline-block" class="mt5">keys:{{ state.dbsize }}</span>
+                        </el-col>
+                        -->
+          </el-row>
           <!-- 
                         <el-tree
                         :style="{ maxHeight: state.keyTreeHeight, height: state.keyTreeHeight,width: keyTreeWidth, overflow: 'auto', border: '1px solid #e1f3d8' }"
@@ -210,54 +233,6 @@
               </el-row>
             </div>
           </div>
-
-          <el-row class="mb5 mt5">
-            <el-col :span="19">
-              <el-button
-                class="ml5"
-                :disabled="!scanParam.id || !scanParam.db"
-                @click="scan(true)"
-                type="primary"
-                icon="more"
-                size="small"
-                plain
-                >CLI</el-button
-              >
-
-              <el-button
-                v-auth="'redis:data:save'"
-                :disabled="!scanParam.id || !scanParam.db"
-                @click="showNewKeyDialog"
-                type="primary"
-                icon="plus"
-                size="small"
-                plain
-                >command helper</el-button
-              >
-            </el-col>
-
-            <!-- 
-                        <el-col :span="5">
-                            <span style="display: inline-block" class="mt5">keys:{{ state.dbsize }}</span>
-                        </el-col>
-                        -->
-          </el-row>
-
-          <!--
-                    <div class="cli-container">
-                <el-button @click="toggleCliInput">CLI</el-button>
-                </div>
-                
-                <div v-if="cliInputVisible" class="cli-input-container">
-                <textarea
-                    v-model="cliInputText"
-                    class="resizable-textarea"
-                    placeholder="输入文本"
-                    :style="{ height: cliInputHeight + 'px' }"
-                ></textarea>
-                </div>
-                    
-                    -->
         </div>
       </el-col>
 
@@ -334,36 +309,6 @@ import { keysToTree, sortByTreeNodes, keysToList } from './utils'
 
 const KeyDetail = defineAsyncComponent(() => import('./KeyDetail.vue'))
 
-const cliVisible = ref<boolean>(false) // 用于控制CLI文本的显示状态
-const cliText = ref<string>('') // 用于保存CLI文本
-const cliInputHeight = ref<number>(200)
-
-// show key
-const showCli = () => {
-  // 在按钮点击时设置CLI文本的显示状态为true
-  cliVisible.value = true
-  cliText.value = '展示看看'
-  // 在实际应用中，你可以在这里执行CLI命令并获取结果，然后将结果赋值给cliText
-  // 例如：cliText.value = "执行的CLI命令的结果";
-}
-
-const cliInputVisible = ref<boolean>(false) // 用于控制输入文本框的显示状态
-const cliInputText = ref<string>('') // 用于保存输入文本框中的文本
-
-const toggleCliInput = () => {
-  // 在按钮点击时设置CLI文本的显示状态为true
-  cliInputVisible.value = !cliInputVisible.value
-  // 在实际应用中，你可以在这里执行CLI命令并获取结果，然后将结果赋值给cliText
-  // 例如：cliText.value = "执行的CLI命令的结果";
-}
-
-const closeCliInput = () => {
-  // 在按钮点击时设置CLI文本的显示状态为true
-  cliInputVisible.value = false
-  cliText.value = cliInputText.value // 在实际应用中，你可以在这里执行CLI命令并获取结果，然后将结果赋值给cliText
-  // 例如：cliText.value = "执行的CLI命令的结果";
-}
-
 /**
  * 树节点类型
  */
@@ -382,8 +327,6 @@ const defaultCount = 250
 
 const keyTreeRef: any = ref(null)
 const rightMenuRef: any = ref(null)
-
-const keyTreeWidth = 100
 
 const dataSpan = ref(20)
 
@@ -414,7 +357,8 @@ const state = reactive({
     db: null as any,
     match: null,
     count: defaultCount,
-    cursor: {}
+    cursor: {},
+    isEnd: false
   },
   newKeyDialog: {
     visible: false,
@@ -540,6 +484,9 @@ const scan = async (appendKey = false) => {
   isTrue(state.scanParam.id != null, '请先选择redis')
   notBlank(state.scanParam.db, '请先选择库')
 
+  if (state.scanParam.isEnd) {
+    return
+  }
   const match: string = state.scanParam.match || ''
   if (!match) {
     state.scanParam.count = defaultCount
@@ -559,10 +506,12 @@ const scan = async (appendKey = false) => {
     scanParam.count = Math.floor(state.scanParam.count / 3)
   }
 
+  console.log('redis param:', scanParam)
   try {
     state.loadingKeyTree = true
     const res = await redisApi.scan.request(scanParam)
     // 追加key，则将新key合并至原keys（加载更多）
+    console.log('redis key:', res)
     if (appendKey) {
       state.keys = [...state.keys, ...res.keys_info]
     } else {
@@ -571,6 +520,7 @@ const scan = async (appendKey = false) => {
     setKeyList(state.keys)
     state.dbsize = res.dbSize
     state.scanParam.cursor = res.cursor
+    state.scanParam.isEnd = res.isEnd
   } finally {
     state.loadingKeyTree = false
   }

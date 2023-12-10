@@ -92,11 +92,7 @@
             </el-form-item>
           </el-tab-pane>
 
-          <el-tab-pane label="其他配置" name="other">
-            <el-form-item prop="sshTunnelMachineId" label="SSH隧道:">
-              <ssh-tunnel-select v-model="form.sshTunnelMachineId" />
-            </el-form-item>
-          </el-tab-pane>
+          <el-tab-pane label="其他配置" name="other"> </el-tab-pane>
         </el-tabs>
       </el-form>
 
@@ -116,7 +112,6 @@ import { redisApi } from '@/common/redisApi'
 import { ElMessage } from 'element-plus'
 import { RsaEncrypt } from '@/common/rsa'
 import TagSelect from '../component/TagSelect.vue'
-import SshTunnelSelect from '../component/SshTunnelSelect.vue'
 
 const props = defineProps({
   visible: {

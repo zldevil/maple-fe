@@ -1,41 +1,5 @@
 <template>
   <div>
-    <el-row>
-      <el-col :span="20" v-if="state.db">
-        <el-button
-          type="primary"
-          icon="plus"
-          @click="addQueryTab({ id: nowDbInst.id, dbs: nowDbInst.databases }, state.db)"
-          size="small"
-        >
-          新建查询
-        </el-button>
-        <el-button
-          type="primary"
-          icon="plus"
-          @click="addQueryTab({ id: nowDbInst.id, dbs: nowDbInst.databases }, state.db)"
-          size="small"
-        >
-          表信息
-        </el-button>
-        <el-button
-          type="primary"
-          icon="plus"
-          @click="addQueryTab({ id: nowDbInst.id, dbs: nowDbInst.databases }, state.db)"
-          size="small"
-        >
-          结构
-        </el-button>
-        <el-button
-          type="primary"
-          icon="plus"
-          @click="addQueryTab({ id: nowDbInst.id, dbs: nowDbInst.databases }, state.db)"
-          size="small"
-        >
-          内容
-        </el-button>
-      </el-col>
-    </el-row>
     <el-row type="flex">
       <el-col :span="4" style="border-left: 1px solid #eee; margin-top: 10px">
         <tag-tree
@@ -104,6 +68,33 @@
         </tag-tree>
       </el-col>
       <el-col :span="20">
+        <el-row v-if="state.db">
+          <el-button
+            type="primary"
+            icon="plus"
+            @click="addQueryTab({ id: nowDbInst.id, dbs: nowDbInst.databases }, state.db)"
+            size="small"
+          >
+            查询
+          </el-button>
+          <el-button
+            type="primary"
+            icon="Share"
+            @click="addQueryTab({ id: nowDbInst.id, dbs: nowDbInst.databases }, state.db)"
+            size="small"
+          >
+            表信息
+          </el-button>
+          <el-button
+            type="primary"
+            icon="Share"
+            @click="addQueryTab({ id: nowDbInst.id, dbs: nowDbInst.databases }, state.db)"
+            size="small"
+          >
+            结构
+          </el-button>
+        </el-row>
+
         <el-container id="data-exec" style="border-left: 1px solid #eee; margin-top: 10px">
           <el-tabs
             @tab-remove="onRemoveTab"

@@ -39,13 +39,6 @@
         </el-button>
       </template>
 
-      <template #tagPath="{ data }">
-        <tag-info :tag-path="data.tagPath" />
-        <span class="ml5">
-          {{ data.tagPath }}
-        </span>
-      </template>
-
       <template #more="{ data }">
         <el-button @click="showDetail(data)" link>详情</el-button>
 
@@ -230,7 +223,7 @@ import { ref, toRefs, reactive, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import RedisEdit from './RedisEdit.vue'
 import { dateFormat } from '@/common/utils/date'
-import TagInfo from '../component/TagInfo.vue'
+
 import PageTable from '@/components/pagetable/PageTable.vue'
 import { TableColumn, TableQuery } from '@/components/pagetable'
 
