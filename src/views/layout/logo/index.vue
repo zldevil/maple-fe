@@ -3,9 +3,6 @@
     <img src="@/assets/image/logo.svg" class="layout-logo-medium-img" />
     <span>
       {{ `${themeConfig.globalTitle}` }}
-      <sub
-        ><span style="font-size: 10px; color: goldenrod">{{ ` ${config.version}` }}</span></sub
-      >
     </span>
   </div>
   <div class="layout-logo-size" v-else @click="onThemeConfigChange">
@@ -17,7 +14,6 @@
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useThemeConfig } from '@/store/themeConfig'
-import config from '@/common/config'
 import mittBus from '@/common/utils/mitt'
 
 const { themeConfig } = storeToRefs(useThemeConfig())
