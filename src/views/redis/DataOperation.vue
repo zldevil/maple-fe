@@ -1,7 +1,7 @@
 <template>
   <!-- 数据操作是redis点击操作的入口 -->
   <div>
-    <el-row>
+    <el-row :gutter="4">
       <el-col :span="4">
         <el-row type="flex" justify="space-between">
           <el-col :span="24" class="el-scrollbar flex-auto">
@@ -37,7 +37,7 @@
 
       <el-col v-loading="state.loadingKeyTree" :span="dataSpan">
         <div class="key-list-vtree">
-          <el-row>
+          <el-row class="custom-row">
             <el-col :span="2">
               <el-input
                 v-model="state.keySeparator"
@@ -107,41 +107,43 @@
           </el-row>
 
           <!-- 展示redis key信息 -->
+          <el-row class="custom-row">
+            <el-table
+              size="default"
+              :data="keyTreeData"
+              stripe
+              :style="{
+                maxHeight: state.keyTreeHeight,
+                height: state.keyTreeHeight,
+                overflow: 'auto',
+                border: '1px solid #e1f3d8'
+              }"
+              @row-click="handleKeyTreeNodeClick"
+            >
+              <el-table-column prop="type" :label="'(Total: ' + state.dbsize + ')'" width="100">
+                <template #default="scope">
+                  <el-tag :type="scope.row.type" disable-transitions>{{ scope.row.type }}</el-tag>
+                </template>
+              </el-table-column>
 
-          <el-table
-            size="default"
-            :data="keyTreeData"
-            stripe
-            :style="{
-              maxHeight: state.keyTreeHeight,
-              height: state.keyTreeHeight,
-              overflow: 'auto',
-              border: '1px solid #e1f3d8'
-            }"
-            @row-click="handleKeyTreeNodeClick"
-          >
-            <el-table-column prop="type" :label="'(Total: ' + state.dbsize + ')'" width="100">
-              <template #default="scope">
-                <el-tag :type="scope.row.type" disable-transitions>{{ scope.row.type }}</el-tag>
-              </template>
-            </el-table-column>
+              <el-table-column prop="key" label="Key" />
 
-            <el-table-column prop="key" label="Key" />
+              <el-table-column label="Operations" width="200">
+                <template #default="scope">
+                  <el-button size="small" @click="showKeyDetail(scope.row.key, true)"
+                    >new tab</el-button
+                  >
+                  <el-button
+                    size="small"
+                    type="danger"
+                    @click="delKey(scope.row.key)"
+                    icon="delete"
+                  ></el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-row>
 
-            <el-table-column label="Operations" width="200">
-              <template #default="scope">
-                <el-button size="small" @click="showKeyDetail(scope.row.key, true)"
-                  >new tab</el-button
-                >
-                <el-button
-                  size="small"
-                  type="danger"
-                  @click="delKey(scope.row.key)"
-                  icon="delete"
-                ></el-button>
-              </template>
-            </el-table-column>
-          </el-table>
           <!-- 展示快捷按钮-->
           <el-row class="mb5 mt5">
             <el-button
@@ -839,5 +841,9 @@ const delKey = (key: string) => {
   /* 宽度100%，填充容器 */
   min-height: 200px;
   /* 设置最小高度 */
+}
+
+.custom-row {
+  margin-bottom: 4px; /* Adjust the value as needed */
 }
 </style>
